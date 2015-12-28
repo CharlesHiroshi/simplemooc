@@ -16,12 +16,12 @@
         <ul>
             <li class="pure-menu-selected"><a href="{% url 'home' %}">Início</a></li>
             <li><a href="#">Cursos</a></li>
-            <li><a href="#">Contato</a></li>
+            <li><a href="{% url 'contact' %}">Contato</a></li>
         </ul>
     </div>
 </div>
 <div class="content">
-    {% block content %}{% endblock %}
+    {% block content %}{% endblock content %}
     <div class="footer">
         Simple MOOC - Uma simples plataforma de ensino a distância
     </div>
