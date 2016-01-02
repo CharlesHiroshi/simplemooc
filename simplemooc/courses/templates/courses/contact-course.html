@@ -54,27 +54,29 @@
     <div class="pure-g-r content-ribbon" id="contato">
         <div class="pure-u-1">
             <h3>Tire sua dúvida sobre o Curso</h3>
-            <form class="pure-form pure-form-aligned" method="post">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert success">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="#contato" class="pure-form pure-form-aligned" method="post">
                 {% csrf_token %}
                 <fieldset>
-                    <div class="pure-control-group">
-                        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
-                        {{ form.name.errors }}
-                        {{ form.name }}
-                    </div>
-
-                    <div class="pure-control-group">
-                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-                        {{ form.email.errors }}
-                        {{ form.email }}
-                    </div>
-
-                    <div class="pure-control-group">
-                        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
-                        {{ form.message.errors }}
-                        {{ form.message }}
-                    </div>
-
+                    {% for field in form %}
+                        <div class="pure-control-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.errors %}
+                                <ul class="errorlist">
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                     <div class="pure-controls">
                         <button type="submit" class="pure-button pure-button-primary">
                             Enviar

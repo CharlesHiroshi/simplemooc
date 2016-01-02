@@ -1,0 +1,18 @@
+Olá! Tudo bem?
+
+Muito obrigado por entrar em contato conosco do Simple MOOC.
+
+Estes são os dados de contato que você nos forneceu
+para nossa comunicaçao:
+
+Nome: {{ name }}
+E-mail: {{ email }}
+Mensagem: {{ message }}
+
+Em até 48 horas úteis, a nossa equipe entrara em contato
+com você para esclarecer suas dúvidas/solicitações sobre
+o curso.
+
+Atenciosamente,
+
+Charles Hiroshi.
