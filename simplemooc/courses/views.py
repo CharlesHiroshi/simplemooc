@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from simplemooc.courses.forms import ContactCourseForm
 
 
 def contactCourse(request):
-    return render(request, 'courses/contact-course.html')
+    context = {'form': ContactCourseForm()}
+    return render(request, 'courses/contact-course.html', context)
