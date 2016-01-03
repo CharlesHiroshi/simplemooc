@@ -1,40 +1,40 @@
 {% extends "base.html" %}
 {% load static %}
+{% block title %}Página de contato - Simple MOOC{% endblock title %}
 {% block content %}
-
-    <div class="pure-g-r content-ribbon" id="contato">
-        <div class="pure-u-1">
-            <h3>Envie sua Mensagem ou Dúvida para nós!</h3>
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert success">
-                        <p>{{ message }}</p>
+<div class="pure-g-r content-ribbon" id="contato">
+    <div class="pure-u-1">
+        <h3>Envie sua Mensagem ou Dúvida para nós!</h3>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert success">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form action="#contato" class="pure-form pure-form-aligned" method="post">
+            {% csrf_token %}
+            <fieldset>
+                {% for field in form %}
+                    <div class="pure-control-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 {% endfor %}
-            {% endif %}
-            <form action="#contato" class="pure-form pure-form-aligned" method="post">
-                {% csrf_token %}
-                <fieldset>
-                    {% for field in form %}
-                        <div class="pure-control-group">
-                            {{ field.label_tag }}
-                            {{ field }}
-                            {% if field.errors %}
-                                <ul class="errorlist">
-                                    {% for error in field.errors %}
-                                        <li>{{ error }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                    <div class="pure-controls">
-                        <button type="submit" class="pure-button pure-button-primary">
-                            Enviar
-                        </button>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+                <div class="pure-controls">
+                    <button type="submit" class="pure-button pure-button-primary">
+                        Enviar
+                    </button>
+                </div>
+            </fieldset>
+        </form>
     </div>
+</div>
 {% endblock content %}

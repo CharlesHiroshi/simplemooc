@@ -3,7 +3,7 @@ from django.test import TestCase
 from simplemooc.courses.forms import ContactCourseForm
 
 
-class ContactCourseTest(TestCase):
+class ContactCourseGet(TestCase):
     def setUp(self):
         self.response = self.client.get('/courses/contact-course/')
 
@@ -17,13 +17,17 @@ class ContactCourseTest(TestCase):
 
     def test_html(self):
         """Html must contain input tags"""
-        self.assertContains(self.response, '<form')
-        self.assertContains(self.response, 'input', 3)
-        self.assertContains(self.response, 'type="text"')
-        self.assertContains(self.response, 'type="email"')
-        self.assertContains(self.response, '<textarea')
-        self.assertContains(self.response, '<button')
-        self.assertContains(self.response, 'type="submit"')
+        tags = (('<form', 1),
+                ('input', 3),
+                ('type="text"', 1),
+                ('type="email"', 1),
+                ('<textarea', 1),
+                ('<button', 1),
+                ('type="submit"', 1),
+                )
+        for text, count in tags:
+            with self.subTest():
+                self.assertContains(self.response, text, count)
 
     def test_csrf(self):
         """Html must contain csrf"""
@@ -34,13 +38,8 @@ class ContactCourseTest(TestCase):
         form = self.response.context['form']
         self.assertIsInstance(form, ContactCourseForm)
 
-    def test_form_has_fields(self):
-        """Form must have 3 fields"""
-        form = self.response.context['form']
-        self.assertSequenceEqual(['name', 'email', 'message'], list(form.fields))
 
-
-class ContactCoursePostTest(TestCase):
+class ContactCoursePostValid(TestCase):
     def setUp(self):
         data = dict(name='Charles Hiroshi', email='charles@simplemooc.com',
                     message='Corpo da Mensagem')
@@ -54,29 +53,8 @@ class ContactCoursePostTest(TestCase):
         """Valida o envio de email"""
         self.assertEqual(1, len(mail.outbox))
 
-    def test_contactCourse_email_subject(self):
-        email = mail.outbox[0]
-        expect = 'Confirmação de Envio'
-        self.assertEqual(expect, email.subject)
 
-    def test_contactCourse_email_from(self):
-        email = mail.outbox[0]
-        expect = 'contato@simplemooc.org'
-        self.assertEqual(expect, email.from_email)
-
-    def test_contactCourse_email_to(self):
-        email = mail.outbox[0]
-        expect = ['contato@simplemooc.org', 'charles@simplemooc.com']
-        self.assertEqual(expect, email.to)
-
-    def test_contactCourse_email_body(self):
-        email = mail.outbox[0]
-        self.assertIn('Charles Hiroshi', email.body)
-        self.assertIn('charles@simplemooc.com', email.body)
-        self.assertIn('Corpo da Mensagem', email.body)
-
-
-class ContactCourseInvalidPost(TestCase):
+class ContactCoursePostInvalid(TestCase):
     def setUp(self):
         self.response = self.client.post('/courses/contact-course/', {})
 

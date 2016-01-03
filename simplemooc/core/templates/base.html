@@ -1,29 +1,14 @@
-<!doctype html>
 {% load static %}
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Simple MOOC - Uma simples plataforma de ensino a distância" />
-    <title>Simple MOOC</title>
+    <meta name="description" content="Simple MOOC - Uma simples plataforma de ensino a distância"/>
+    <title>{% block title %}Simple MOOC{% endblock title %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/pure/0.3.0/pure-min.css">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-    <style>
-        .alert {
-            padding: 0 15px;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: .25rem;
-        }
-        .alert p {
-            padding: 7px 0 7px;
-        }
-        .alert.success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d0e9c6;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+
 </head>
 <body>
 <div class="header">
