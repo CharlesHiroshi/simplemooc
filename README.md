@@ -1,4 +1,7 @@
-# Eventex
+# SIMPLEMOOC
+
+[![Code Climate](https://codeclimate.com/repos/56889acfc0992f10b1006986/badges/70bbfee7043f1b36483a/gpa.svg)](https://codeclimate.com/repos/56889acfc0992f10b1006986/feed)
+
 
 Sistema de Cursos MOOC
 
